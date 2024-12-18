@@ -3,10 +3,9 @@ package dao;
 import Hibernate.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
 import java.util.List;
 
-
+//git prueba
 public class GenericDAO<T> {
     private final Class<T> entidad;
 
