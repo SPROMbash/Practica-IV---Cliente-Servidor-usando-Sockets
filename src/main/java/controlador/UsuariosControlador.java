@@ -24,16 +24,7 @@ public class UsuariosControlador {
         }
     }
 
-    public void listarUsuarios(ActionEvent actionEvent) {
-        try (Socket socket = new Socket("localhost", 12345);
-             ObjectInputStream entrada = new ObjectInputStream(socket.getInputStream());
-             DataOutputStream salida = new DataOutputStream(socket.getOutputStream())) {
-            salida.writeUTF("usuario:listar");
-            List<Usuario> usuarios = (List<Usuario>) entrada.readObject();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+
 
     public void actualizarUsuario(ActionEvent actionEvent) {
         try (Socket socket = new Socket("localhost", 12345);

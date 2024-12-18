@@ -18,6 +18,9 @@ public class Proyecto implements Serializable {
     @Column(name = "descripcion")
     private String descripcion;
 
+    @Column(name = "tipo")
+    private String tipo;
+
     @ManyToMany (mappedBy = "proyectos", cascade = CascadeType.ALL)
     private List<Usuario> usuarios;
 
@@ -41,6 +44,14 @@ public class Proyecto implements Serializable {
         this.nombre = nombre;
     }
 
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
     public List<Usuario> getUsuarios() {
         return usuarios;
     }
@@ -59,6 +70,6 @@ public class Proyecto implements Serializable {
 
      @Override
     public String toString() {
-         return "Proyecto -> id: " + id + " || nombre: " + nombre + " || descripcion: " + descripcion;
+         return "Proyecto -> id: " + id + " || nombre: " + nombre + " || descripcion: " + descripcion + " || tipo: " + tipo;
     }
 }

@@ -10,33 +10,86 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.Button?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #D1BEB0;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.PrincipalControlador">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #87B4FD;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.PrincipalControlador">
    <children>
-      <Label layoutX="247.0" layoutY="99.0" text="Bienvenido a la gestión de Usuarios y Proyectos">
+      <Label alignment="CENTER" layoutX="247.0" layoutY="64.0" text="Bienvenido a la gestión de Usuarios y Proyectos" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="64.0">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <Label layoutX="390.0" layoutY="159.0" text="Proyecto desarrollado por Daniel Brito Negrín y Tecen Díaz Quintana">
+      <Label alignment="CENTER" layoutX="200.0" layoutY="117.0" text="Proyecto desarrollado por Daniel Brito Negrín y Tecen Díaz Quintana" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="117.0">
          <font>
             <Font name="System Bold Italic" size="16.0" />
          </font>
       </Label>
-      <Button fx:id="buttonUsuario" layoutX="338.0" layoutY="400.0" mnemonicParsing="false" onAction="#abrirUsuario" prefHeight="61.0" prefWidth="281.0" style="-fx-background-color: #3066BE; -fx-background-radius: 25;" text="Acceder a Gestión de Usuario" textFill="WHITE">
+      <MenuBar layoutY="2.0" style="-fx-background-color: #ECD5C4;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Usuarios">
+            <items>
+              <MenuItem fx:id="menuItemCrearUsuario" mnemonicParsing="false" onAction="#crearUsuario" text="Crear usuario..." />
+                  <MenuItem fx:id="menuItemModificarUsuario" mnemonicParsing="false" onAction="#modificarUsuario" text="Modificar usuario..." />
+                  <MenuItem fx:id="menuItemEliminarUsuario" mnemonicParsing="false" onAction="#eliminarUsuario" text="Eliminar usuario..." />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Consultas">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+              </items>
+            </Menu>
+          <Menu mnemonicParsing="false" text="Ayuda">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Ayuda..." />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Accesibilidad">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Tamaño del texto" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Salir">
+              <items>
+                <MenuItem fx:id="menuItemSalir" mnemonicParsing="false" onAction="#salir" text="Salir..." />
+              </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+      <Label layoutX="50.0" layoutY="182.0" text="Lista de usuarios:" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="750.0">
          <font>
-            <Font name="System Italic" size="18.0" />
+            <Font name="System Bold" size="28.0" />
          </font>
-      </Button>
-      <Button fx:id="buttonProyectos" layoutX="690.0" layoutY="400.0" mnemonicParsing="false" onAction="#abrirProyectos" prefHeight="61.0" prefWidth="281.0" style="-fx-background-color: #3066BE; -fx-background-radius: 25;" text="Acceder a Gestión de Proyectos" textFill="WHITE">
+      </Label>
+      <TableView fx:id="tablaUsuarios" layoutX="50.0" layoutY="247.0" prefHeight="244.0" style="-fx-background-color: #D9E8FF;" AnchorPane.leftAnchor="50.0">
+        <columns>
+          <TableColumn fx:id="tcIdUsuario" prefWidth="35.0" styleClass="table-cell" text="id" />
+          <TableColumn fx:id="tcNombreUsuario" minWidth="0.0" prefWidth="114.0" styleClass="table-cell" text="Nombre" />
+            <TableColumn fx:id="tcApellidosUsuario" prefWidth="119.0" styleClass="table-cell" text="Apellidos" />
+            <TableColumn fx:id="tcEmailUsuario" prefWidth="224.0" styleClass="table-cell" text="Email" />
+        </columns>
+      </TableView>
+      <Label layoutX="757.0" layoutY="182.0" text="Lista de proyectos:" AnchorPane.leftAnchor="757.0" AnchorPane.rightAnchor="50.0">
          <font>
-            <Font name="System Italic" size="18.0" />
+            <Font name="System Bold" size="28.0" />
          </font>
-      </Button>
-      <Button fx:id="buttonSalir" layoutX="553.0" layoutY="533.0" mnemonicParsing="false" onAction="#salir" prefHeight="61.0" prefWidth="195.0" style="-fx-background-color: #3066BE; -fx-background-radius: 25;" text="Salir" textFill="WHITE">
+      </Label>
+      <TableView fx:id="tablaProyectos" layoutX="731.0" layoutY="247.0" prefHeight="244.0" style="-fx-background-color: #D9E8FF;" AnchorPane.leftAnchor="756.0" AnchorPane.rightAnchor="50.0">
+         <columns>
+            <TableColumn fx:id="tcIdProyecto" prefWidth="35.0" styleClass="table-cell" text="id" />
+            <TableColumn fx:id="tcNombreProyecto" minWidth="0.0" prefWidth="113.0" styleClass="table-cell" text="Nombre" />
+            <TableColumn fx:id="tcDescipcionProyecto" prefWidth="252.0" styleClass="table-cell" text="Descripción" />
+            <TableColumn fx:id="tcTipoProyecto" minWidth="-1.0" prefWidth="92.0" styleClass="table-cell" text="Tipo" />
+         </columns>
+      </TableView>
+      <Label alignment="CENTER" layoutX="150.0" layoutY="514.0" text="Lista de usuarios y proyectos:" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="514.0">
          <font>
-            <Font name="System Italic" size="18.0" />
+            <Font name="System Bold" size="28.0" />
          </font>
-      </Button>
+      </Label>
+      <TableView fx:id="tablaUsuariosProyectos" layoutX="538.0" layoutY="571.0" prefHeight="167.0" style="-fx-background-color: #D9E8FF;">
+         <columns>
+            <TableColumn fx:id="tcIdUsuarioProyecto" prefWidth="35.0" styleClass="table-cell" text="id" />
+            <TableColumn fx:id="tcIdUsuarioUsuarioProyecto" minWidth="0.0" prefWidth="110.0" styleClass="table-cell" text="ID_Usuario" />
+            <TableColumn fx:id="tcIdProyectoUsuarioProyecto" prefWidth="102.0" styleClass="table-cell" text="ID_Proyecto" />
+         </columns>
+      </TableView>
    </children>
 </AnchorPane>
