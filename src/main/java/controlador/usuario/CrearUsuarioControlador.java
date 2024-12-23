@@ -1,4 +1,4 @@
-package controlador;
+package controlador.usuario;
 
 import com.example.pr4sockets.App;
 import javafx.event.ActionEvent;
@@ -33,7 +33,7 @@ public class CrearUsuarioControlador {
                 alert.setContentText(respuesta);
                 alert.showAndWait();
             }
-            App.setRoot("principal", "Principal");
+            volver(null);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -89,5 +89,4 @@ public class CrearUsuarioControlador {
             return false;
         }
     }
-
 }

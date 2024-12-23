@@ -58,7 +58,16 @@ public class ManejoCliente implements Runnable {
         }
     }
 
-    private void procesarPeticionProyecto(String s) {
+    private void procesarPeticionProyecto(String peticion) {
+        if (peticion.equalsIgnoreCase("crear")) {
+            crearProyecto();
+        } else if (peticion.equalsIgnoreCase("listar")) {
+            listarProyectos();
+        } else if (peticion.equalsIgnoreCase("actualizar")) {
+            actualizarProyecto();
+        } else if (peticion.equalsIgnoreCase("eliminar")) {
+            eliminarProyecto();
+        }
     }
 
     private void procesarPeticionUsuario(String peticion) {
@@ -95,9 +104,13 @@ public class ManejoCliente implements Runnable {
         monitor.lock();
         try {
             ArrayList<Usuario> usuarios = (ArrayList<Usuario>) usuarioDAO.getTodos();
-            salida.writeInt(usuarios.size());
-            for (Usuario usuario : usuarios) {
-                salida.writeUTF(usuario.serializar());
+            if (usuarios != null) {
+                salida.writeInt(usuarios.size());
+                for (Usuario usuario : usuarios) {
+                    salida.writeUTF(usuario.serializar());
+                }
+            } else {
+                salida.writeInt(0);
             }
             salida.writeUTF("Usuarios listados correctamente");
         } catch (Exception e) {
@@ -142,5 +155,74 @@ public class ManejoCliente implements Runnable {
         } finally {
             monitor.unlock();
         }
+    }
+
+    private void crearProyecto() {
+        monitor.lock();
+        try {
+            String nombre = entrada.readUTF();
+            String descripcion = entrada.readUTF();
+            String tipo = entrada.readUTF();
+            Proyecto proyecto = new Proyecto(nombre, descripcion, tipo);
+            System.out.println("Proyecto recibido: " + proyecto);
+            proyectoDAO.crear(proyecto);
+            salida.writeUTF("Proyecto creado correctamente");
+        } catch (Exception e) {
+            System.err.println("Error al crear el proyecto: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            monitor.unlock();
+        }
+    }
+
+    private void listarProyectos() {
+        monitor.lock();
+        try {
+            ArrayList<Proyecto> proyectos = (ArrayList<Proyecto>) proyectoDAO.getTodos();
+            salida.writeInt(proyectos.size());
+            for (Proyecto proyecto : proyectos) {
+                salida.writeUTF(proyecto.serializar());
+            }
+            salida.writeUTF("Usuarios listados correctamente");
+        } catch (Exception e) {
+            System.err.println("Error al listar los usuarios: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            monitor.unlock();
+        }
+    }
+
+    private void actualizarProyecto() {
+        monitor.lock();
+        try {
+            String idProyecto = entrada.readUTF();
+            String nombre = entrada.readUTF();
+            String descripcion = entrada.readUTF();
+            String tipo = entrada.readUTF();
+
+            Proyecto proyecto = proyectoDAO.obtenerPorId(Integer.parseInt(idProyecto));
+
+            if (!nombre.isEmpty()) {
+                proyecto.setNombre(nombre);
+            }
+            if (!descripcion.isEmpty()) {
+                proyecto.setDescripcion(descripcion);
+            }
+            if (!tipo.isEmpty()) {
+                proyecto.setTipo(tipo);
+            }
+
+            proyectoDAO.actualizar(proyecto);
+            salida.writeUTF("Proyecto actualizado correctamente.");
+        } catch (Exception e) {
+
+        } finally {
+            monitor.unlock();
+        }
+
+    }
+
+    private void eliminarProyecto() {
+
     }
 }

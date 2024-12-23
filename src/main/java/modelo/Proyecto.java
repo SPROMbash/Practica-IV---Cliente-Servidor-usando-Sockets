@@ -28,6 +28,34 @@ public class Proyecto implements Serializable {
 
     }
 
+    public Proyecto(String nombre, String descripcion, String tipo) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.tipo = tipo;
+    }
+
+    public Proyecto(String nombre, String descripcion, String tipo, List<Usuario> usuarios) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.tipo = tipo;
+        this.usuarios = usuarios;
+    }
+
+    public Proyecto(Long id, String nombre, String descripcion, String tipo) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.tipo = tipo;
+    }
+
+    public Proyecto(Long id, String nombre, String descripcion, String tipo, List<Usuario> usuarios) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.tipo = tipo;
+        this.usuarios = usuarios;
+    }
+
     public Long getId() {
         return id;
     }
@@ -68,6 +96,9 @@ public class Proyecto implements Serializable {
         this.descripcion = descripcion;
     }
 
+    public String serializar() {
+        return id + "," + nombre + "," + descripcion + "," + tipo;
+    }
      @Override
     public String toString() {
          return "Proyecto -> id: " + id + " || nombre: " + nombre + " || descripcion: " + descripcion + " || tipo: " + tipo;

@@ -31,6 +31,13 @@
                   <MenuItem fx:id="menuItemEliminarUsuario" mnemonicParsing="false" onAction="#eliminarUsuario" text="Eliminar usuario..." />
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="Proyectos">
+              <items>
+                <MenuItem fx:id="menuItemCrearProyecto" mnemonicParsing="false" onAction="#crearProyecto" text="Crear proyecto..." />
+                  <MenuItem fx:id="menuItemModificarProyecto" mnemonicParsing="false" onAction="#modificarProyecto" text="Modificar proyecto..." />
+                  <MenuItem fx:id="menuItemEliminarProyecto" mnemonicParsing="false" onAction="#eliminarProyecto" text="Eliminar proyecto..." />
+              </items>
+            </Menu>
             <Menu mnemonicParsing="false" text="Consultas">
               <items>
                 <MenuItem mnemonicParsing="false" text="Action 1" />
@@ -71,11 +78,11 @@
             <Font name="System Bold" size="28.0" />
          </font>
       </Label>
-      <TableView fx:id="tablaProyectos" layoutX="731.0" layoutY="247.0" prefHeight="244.0" style="-fx-background-color: #D9E8FF;" AnchorPane.leftAnchor="756.0" AnchorPane.rightAnchor="50.0">
+      <TableView fx:id="tablaProyecto" layoutX="731.0" layoutY="247.0" prefHeight="244.0" style="-fx-background-color: #D9E8FF;" AnchorPane.leftAnchor="756.0" AnchorPane.rightAnchor="50.0">
          <columns>
             <TableColumn fx:id="tcIdProyecto" prefWidth="35.0" styleClass="table-cell" text="id" />
             <TableColumn fx:id="tcNombreProyecto" minWidth="0.0" prefWidth="113.0" styleClass="table-cell" text="Nombre" />
-            <TableColumn fx:id="tcDescipcionProyecto" prefWidth="252.0" styleClass="table-cell" text="Descripción" />
+            <TableColumn fx:id="tcDescripcionProyecto" prefWidth="252.0" styleClass="table-cell" text="Descripción" />
             <TableColumn fx:id="tcTipoProyecto" minWidth="-1.0" prefWidth="92.0" styleClass="table-cell" text="Tipo" />
          </columns>
       </TableView>
