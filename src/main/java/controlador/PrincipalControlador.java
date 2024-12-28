@@ -3,21 +3,28 @@ package controlador;
 import com.example.pr4sockets.App;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import modelo.Proyecto;
 import modelo.Usuario;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PrincipalControlador {
+    @FXML
+    private TextField txtNombre;
+    @FXML
+    private TextField txtEmail;
+    @FXML
+    private ComboBox<String> cbTipo;
+
     @FXML
     private TableView<Usuario> tablaUsuarios;
     @FXML
@@ -53,6 +60,12 @@ public class PrincipalControlador {
         tcDescripcionProyecto.setCellValueFactory(new PropertyValueFactory<>("Descripcion"));
         tcTipoProyecto.setCellValueFactory(new PropertyValueFactory<>("Tipo"));
         listarProyectos();
+
+        cbTipo.getItems().addAll("Desarrollo", "Investigación", "Formación", "Mejora", "Empresarial");
+
+        txtNombre.textProperty().addListener((observable, oldValue, newValue) -> filtrarNombre());
+        txtEmail.textProperty().addListener((observable, oldValue, newValue) -> filtrarEmail());
+        cbTipo.valueProperty().addListener((observable, oldValue, newValue) -> filtrarTipo());
     }
 
     public void crearUsuario(ActionEvent actionEvent) {
@@ -74,7 +87,7 @@ public class PrincipalControlador {
                 for (int i = 0; i < tamanio; i++) {
                     usuarios.add(deserializarUsuario(entrada.readUTF()));
                 }
-                tablaUsuarios.getItems().addAll(usuarios);
+                tablaUsuarios.getItems().setAll(usuarios);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -116,7 +129,7 @@ public class PrincipalControlador {
             for (int i = 0; i < tamanio; i++) {
                 proyectos.add(deserializarProyecto(entrada.readUTF()));
             }
-            tablaProyecto.getItems().addAll(proyectos);
+            tablaProyecto.getItems().setAll(proyectos);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -150,5 +163,96 @@ public class PrincipalControlador {
     private Proyecto deserializarProyecto(String s) {
         String[] campos = s.split(",");
         return new Proyecto(Long.parseLong(campos[0]), campos[1], campos[2], campos[3]);
+    }
+
+    public void filtrarNombre() {
+        String nombre = txtNombre.getText();
+        if (!nombre.isEmpty()) {
+            try (Socket socket = new Socket("localhost", 12345);
+                 DataInputStream entrada = new DataInputStream(socket.getInputStream());
+                 DataOutputStream salida = new DataOutputStream(socket.getOutputStream())) {
+                salida.writeUTF("usuario:nombre");
+                salida.writeUTF(nombre);
+                int tamanio = entrada.readInt();
+                if (tamanio != 0) {
+                    List<Usuario> usuarios = new ArrayList<>();
+
+                    for (int i = 0; i < tamanio; i++) {
+                        usuarios.add(deserializarUsuario(entrada.readUTF()));
+                    }
+                    tablaUsuarios.getItems().setAll(usuarios);
+                } else {
+                    tablaUsuarios.getItems().clear();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            listarUsuarios();
+        }
+    }
+
+    public void filtrarEmail() {
+        String email = txtEmail.getText();
+        if (!email.isEmpty()) {
+            try (Socket socket = new Socket("localhost", 12345);
+                 DataInputStream entrada = new DataInputStream(socket.getInputStream());
+                 DataOutputStream salida = new DataOutputStream(socket.getOutputStream())) {
+                salida.writeUTF("usuario:email");
+                salida.writeUTF(email);
+                int tamanio = entrada.readInt();
+                if (tamanio != 0) {
+                    List<Usuario> usuarios = new ArrayList<>();
+
+                    for (int i = 0; i < tamanio; i++) {
+                        usuarios.add(deserializarUsuario(entrada.readUTF()));
+                    }
+                    tablaUsuarios.getItems().setAll(usuarios);
+                } else {
+                    tablaUsuarios.getItems().clear();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            listarUsuarios();
+        }
+    }
+
+    public void filtrarTipo() {
+        String tipo = cbTipo.getValue();
+        if ((tipo != null && !tipo.isEmpty())) {
+            try (Socket socket = new Socket("localhost", 12345);
+                 DataInputStream entrada = new DataInputStream(socket.getInputStream());
+                 DataOutputStream salida = new DataOutputStream(socket.getOutputStream())) {
+                salida.writeUTF("proyecto:tipo");
+                salida.writeUTF(tipo);
+                int tamanio = entrada.readInt();
+                if (tamanio != 0) {
+                    List<Proyecto> proyectos = new ArrayList<>();
+
+                    for (int i = 0; i < tamanio; i++) {
+                        proyectos.add(deserializarProyecto(entrada.readUTF()));
+                    }
+                    tablaProyecto.getItems().setAll(proyectos);
+                } else {
+                    tablaProyecto.getItems().clear();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            listarProyectos();
+        }
+    }
+
+    public void limpiarFiltroProyecto(ActionEvent actionEvent) {
+        cbTipo.getSelectionModel().clearSelection();
+        listarProyectos();
+    }
+
+    public void limpiarFiltroUsuario(ActionEvent actionEvent) {
+        txtNombre.clear();
+        txtEmail.clear();
     }
 }

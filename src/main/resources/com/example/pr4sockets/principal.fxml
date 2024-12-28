@@ -22,7 +22,7 @@
             <Font name="System Bold Italic" size="16.0" />
          </font>
       </Label>
-      <MenuBar layoutY="2.0" style="-fx-background-color: #ECD5C4;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <MenuBar layoutY="2.0" style="-fx-background-color: #dedcdc;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
           <Menu mnemonicParsing="false" text="Usuarios">
             <items>
@@ -60,7 +60,7 @@
             </Menu>
         </menus>
       </MenuBar>
-      <Label layoutX="50.0" layoutY="182.0" text="Lista de usuarios:" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="750.0">
+      <Label layoutX="47.0" layoutY="162.0" text="Lista de usuarios:" AnchorPane.leftAnchor="47.0" AnchorPane.rightAnchor="753.0">
          <font>
             <Font name="System Bold" size="28.0" />
          </font>
@@ -73,7 +73,7 @@
             <TableColumn fx:id="tcEmailUsuario" prefWidth="224.0" styleClass="table-cell" text="Email" />
         </columns>
       </TableView>
-      <Label layoutX="757.0" layoutY="182.0" text="Lista de proyectos:" AnchorPane.leftAnchor="757.0" AnchorPane.rightAnchor="50.0">
+      <Label layoutX="757.0" layoutY="162.0" text="Lista de proyectos:" AnchorPane.leftAnchor="757.0" AnchorPane.rightAnchor="50.0">
          <font>
             <Font name="System Bold" size="28.0" />
          </font>
@@ -98,5 +98,41 @@
             <TableColumn fx:id="tcIdProyectoUsuarioProyecto" prefWidth="102.0" styleClass="table-cell" text="ID_Proyecto" />
          </columns>
       </TableView>
+      <TextField fx:id="txtNombre" layoutX="120.0" layoutY="201.0" onAction="#filtrarNombre" prefHeight="30.0" prefWidth="153.0" promptText="Introduce un nombre">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <Label layoutX="50.0" layoutY="206.0" text="Filtar por:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtEmail" layoutX="297.0" layoutY="201.0" onAction="#filtrarEmail" prefHeight="30.0" prefWidth="153.0" promptText="Introduce un email">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <Label layoutX="758.0" layoutY="206.0" text="Filtar por:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="cbTipo" layoutX="916.0" layoutY="205.0" onAction="#filtrarTipo" prefHeight="25.0" prefWidth="120.0" />
+      <Button fx:id="buttonLimpiarProyecto" layoutX="1184.0" layoutY="202.0" mnemonicParsing="false" onAction="#limpiarFiltroProyecto" style="-fx-background-color: #FFFFFF; -fx-background-radius: 10;" text="Limpiar">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="buttonLimpiarUsuario" layoutX="478.0" layoutY="202.0" mnemonicParsing="false" onAction="#limpiarFiltroUsuario" style="-fx-background-color: #FFFFFF; -fx-background-radius: 10;" text="Limpiar">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Label layoutX="871.0" layoutY="207.0" text="Tipo">
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
