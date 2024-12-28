@@ -14,5 +14,6 @@
 
         <mapping class="modelo.Usuario"/>
         <mapping class="modelo.Proyecto"/>
+        <mapping class="modelo.UsuarioProyecto"/>
     </session-factory>
 </hibernate-configuration>
