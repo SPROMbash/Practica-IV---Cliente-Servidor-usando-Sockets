@@ -65,7 +65,7 @@ public class CrearProyectoControlador {
 
     public void volver(ActionEvent actionEvent) {
         try {
-            App.setRoot("principal", "Principal");
+            App.setRoot("principal", "Gestión de usuarios y proyectos - Principal");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -97,5 +97,13 @@ public class CrearProyectoControlador {
 
     private boolean comprobarCampos() {
         return !txtNombre.getText().isEmpty() && !txtDescripcion.getText().isEmpty() && cbTipo.getValue() != null;
+    }
+
+    public void abrirUsuarioProyectos(ActionEvent actionEvent) {
+        try {
+            App.setRoot("usuarioProyectos", "Usuarios - Proyectos");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

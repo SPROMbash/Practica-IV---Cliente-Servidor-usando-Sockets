@@ -1,14 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controlador.usuario.EliminarUsuarioControlador"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #87B4FD;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.usuario.EliminarUsuarioControlador">
+    <children>
+        <MenuBar layoutX="-6.0" layoutY="2.0" style="-fx-background-color: #dedcdc;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="Usuarios">
+                    <items>
+                        <MenuItem fx:id="menuItemCrearUsuario" mnemonicParsing="false" onAction="#crearUsuario" text="Crear usuario..." />
+                        <MenuItem fx:id="menuItemModificarUsuario" mnemonicParsing="false" onAction="#modificarUsuario" text="Modificar usuario..." />
+                        <MenuItem fx:id="menuItemEliminarUsuario" mnemonicParsing="false" onAction="#eliminarUsuario" text="Eliminar usuario..." />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Proyectos">
+                    <items>
+                        <MenuItem fx:id="menuItemCrearProyecto" mnemonicParsing="false" onAction="#crearProyecto" text="Crear proyecto..." />
+                        <MenuItem fx:id="menuItemModificarProyecto" mnemonicParsing="false" onAction="#modificarProyecto" text="Modificar proyecto..." />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Gestionar relaciones">
+                    <items>
+                        <MenuItem fx:id="menuItemUsuarioProyectos" mnemonicParsing="false" onAction="#abrirUsuarioProyectos" text="Relación entre un usuario y sus proyectos" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Consultas">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Action 1" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Ayuda">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Ayuda..." />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Volver">
+                    <items>
+                        <MenuItem fx:id="menuItemVolver" mnemonicParsing="false" onAction="#volver" text="Volver..." />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <Label alignment="CENTER" layoutX="474.0" layoutY="70.0" text="Eliminar un usuario">
+            <font>
+                <Font name="System Bold Italic" size="36.0" />
+            </font>
+        </Label>
+        <ComboBox fx:id="cbUsuarios" layoutX="450.0" layoutY="480.0" prefHeight="39.0" prefWidth="400.0" />
+        <Button fx:id="buttonVolver" layoutX="769.0" layoutY="589.0" mnemonicParsing="false" onAction="#volver" style="-fx-background-radius: 10; -fx-background-color: #ffffff;" text="Volver">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Button>
+        <Button fx:id="buttonEliminar" layoutX="450.0" layoutY="589.0" mnemonicParsing="false" onAction="#eliminar" style="-fx-background-radius: 10; -fx-background-color: #ffffff;" text="Eliminar usuario">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Button>
+        <Label alignment="CENTER_RIGHT" layoutX="493.0" layoutY="436.0" text="Eligue un id existente para eliminar*:">
+            <font>
+                <Font name="System Bold Italic" size="18.0" />
+            </font>
+        </Label>
+      <TableView fx:id="tablaUsuarios" layoutX="223.0" layoutY="145.0" prefHeight="264.0" prefWidth="852.0" style="-fx-background-color: #D9E8FF;">
+         <columns>
+            <TableColumn fx:id="tcIdUsuario" prefWidth="41.0" styleClass="table-cell" text="id" />
+            <TableColumn fx:id="tcNombreUsuario" minWidth="0.0" prefWidth="271.0" styleClass="table-cell" text="Nombre" />
+            <TableColumn fx:id="tcApellidosUsuario" prefWidth="271.0" styleClass="table-cell" text="Apellidos" />
+            <TableColumn fx:id="tcEmailUsuario" prefWidth="271.0" styleClass="table-cell" text="Email" />
+         </columns>
+      </TableView>
+    </children>
 </AnchorPane>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #87B4FD;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.relaciones.UsuarioProyectosControlador">
+   <children>
+      <MenuBar layoutY="2.0" style="-fx-background-color: #dedcdc;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <menus>
+            <Menu mnemonicParsing="false" text="Usuarios">
+               <items>
+                  <MenuItem fx:id="menuItemCrearUsuario" mnemonicParsing="false" onAction="#crearUsuario" text="Crear usuario..." />
+                  <MenuItem fx:id="menuItemModificarUsuario" mnemonicParsing="false" onAction="#modificarUsuario" text="Modificar usuario..." />
+                  <MenuItem fx:id="menuItemEliminarUsuario" mnemonicParsing="false" onAction="#eliminarUsuario" text="Eliminar usuario..." />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Proyectos">
+               <items>
+                  <MenuItem fx:id="menuItemCrearProyecto" mnemonicParsing="false" onAction="#crearProyecto" text="Crear proyecto..." />
+                  <MenuItem fx:id="menuItemModificarProyecto" mnemonicParsing="false" onAction="#modificarProyecto" text="Modificar proyecto..." />
+                  <MenuItem fx:id="menuItemEliminarProyecto" mnemonicParsing="false" onAction="#eliminarProyecto" text="Eliminar proyecto..." />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Consultas">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Action 1" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Ayuda">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Ayuda..." />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Volver">
+               <items>
+                  <MenuItem fx:id="menuItemVolver" mnemonicParsing="false" onAction="#volver" text="Volver..." />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+      <Label alignment="CENTER" layoutX="252.0" layoutY="65.0" prefHeight="46.0" prefWidth="1200.0" text="Gestión de la relación entre un usuario y sus proyectos asignados" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="64.0">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tablaProyecto" layoutX="94.0" layoutY="384.0" prefHeight="244.0" style="-fx-background-color: #D9E8FF;">
+         <columns>
+            <TableColumn fx:id="tcIdProyecto" prefWidth="35.0" styleClass="table-cell" text="id" />
+            <TableColumn fx:id="tcNombreProyecto" minWidth="0.0" prefWidth="113.0" styleClass="table-cell" text="Nombre" />
+            <TableColumn fx:id="tcDescripcionProyecto" prefWidth="252.0" styleClass="table-cell" text="Descripción" />
+            <TableColumn fx:id="tcTipoProyecto" minWidth="-1.0" prefWidth="92.0" styleClass="table-cell" text="Tipo" />
+         </columns>
+      </TableView>
+      <Label layoutX="94.0" layoutY="325.0" text="Lista de proyectos:">
+         <font>
+            <Font name="System Bold" size="28.0" />
+         </font>
+      </Label>
+      <Label layoutX="476.0" layoutY="148.0" text="Elija un usuario:">
+         <font>
+            <Font name="System Bold Italic" size="22.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="cbUsuarios" layoutX="658.0" layoutY="151.0" prefHeight="27.0" prefWidth="213.0" />
+      <Label layoutX="149.0" layoutY="280.0" text="Tipo:">
+         <font>
+            <Font name="System Bold Italic" size="18.0" />
+         </font>
+      </Label>
+      <RadioButton fx:id="rbAsignados" layoutX="247.0" layoutY="280.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="118.0" selected="true" text="Asignados">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <toggleGroup>
+            <ToggleGroup fx:id="rgTipo" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="rbNoAsignados" layoutX="405.0" layoutY="280.0" mnemonicParsing="false" text="No asignados" toggleGroup="$rgTipo">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </RadioButton>
+      <Label layoutX="151.0" layoutY="226.0" text="CONSULTAR PROYECTOS DE UN USUARIO">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="777.0" layoutY="226.0" text="AÑADIR PROYECTO A UN USUARIO">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="764.0" layoutY="420.0" text="ELIMINAR PROYECTO DE UN USUARIO">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="cbProyectosAnadir" layoutX="931.0" layoutY="281.0" prefHeight="27.0" prefWidth="213.0" />
+      <Label layoutX="764.0" layoutY="281.0" text="Elija un proyecto:">
+         <font>
+            <Font name="System Bold Italic" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="765.0" layoutY="479.0" text="Elija un proyecto:">
+         <font>
+            <Font name="System Bold Italic" size="18.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="cbProyectosEliminar" layoutX="932.0" layoutY="479.0" prefHeight="27.0" prefWidth="213.0" />
+      <Button fx:id="buttonAnadir" layoutX="1093.0" layoutY="350.0" mnemonicParsing="false" onAction="#anadirProyecto" style="-fx-background-color: #ffffff; -fx-background-radius: 10;" text="Añadir">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="buttonLimpiar" layoutX="1034.0" layoutY="634.0" mnemonicParsing="false" onAction="#limpiar" style="-fx-background-color: #FFFFFF; -fx-background-radius: 10;" text="Limpiar campos">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="buttonEliminar" layoutX="1093.0" layoutY="529.0" mnemonicParsing="false" onAction="#eliminarProyecto" style="-fx-background-color: #FFFFFF; -fx-background-radius: 10;" text="Añadir">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

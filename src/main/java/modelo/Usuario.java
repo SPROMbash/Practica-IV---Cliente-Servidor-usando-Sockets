@@ -33,6 +33,10 @@ public class Usuario implements Serializable {
 
     }
 
+    public Usuario(Long id) {
+        this.id = id;
+    }
+
     public Usuario(String nombre, String email, String apellidos) {
         this.nombre = nombre;
         this.email = email;
@@ -101,12 +105,21 @@ public class Usuario implements Serializable {
         this.proyectos = proyectos;
     }
 
-    public String serializar() {
-        return id + "," + nombre + "," + apellidos + "," + email;
+    public static Usuario deserializar(String linea) {
+        String[] campos = linea.split(",");
+        return new Usuario(Long.parseLong(campos[0]), campos[1], campos[2], campos[3]);
+    }
+
+    public void addProyecto(Proyecto proyecto) {
+        proyectos.add(proyecto);
+    }
+
+    public void removeProyecto(Proyecto proyecto) {
+        proyectos.remove(proyecto);
     }
 
     @Override
     public String toString() {
-        return "Usuario -> id: " + id + " || nombre: " + nombre + " || apellidos: " + apellidos + " || email: " + email + " || proyectos: " + proyectos;
+        return id + "," + nombre + "," + apellidos + "," + email;
     }
 }

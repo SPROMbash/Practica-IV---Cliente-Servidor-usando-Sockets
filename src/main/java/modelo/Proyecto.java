@@ -28,6 +28,10 @@ public class Proyecto implements Serializable {
 
     }
 
+    public Proyecto(Long id) {
+        this.id = id;
+    }
+
     public Proyecto(String nombre, String descripcion, String tipo) {
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -96,11 +100,21 @@ public class Proyecto implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public String serializar() {
-        return id + "," + nombre + "," + descripcion + "," + tipo;
+    public static Proyecto deserializar(String linea) {
+        String[] campos = linea.split(",");
+        return new Proyecto(Long.parseLong(campos[0]), campos[1], campos[2], campos[3]);
     }
+
+    public void addUsuario(Usuario usuario) {
+        this.usuarios.add(usuario);
+    }
+
+    public void removeUsuario(Usuario usuario) {
+        this.usuarios.remove(usuario);
+    }
+
      @Override
     public String toString() {
-         return "Proyecto -> id: " + id + " || nombre: " + nombre + " || descripcion: " + descripcion + " || tipo: " + tipo;
+         return id + "," + nombre + "," + descripcion + "," + tipo;
     }
 }

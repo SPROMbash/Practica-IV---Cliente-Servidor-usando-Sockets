@@ -13,7 +13,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("principal"), 1300, 800);
-        stage.setTitle("Sistema de gestión de productos mediante RFID - Daniel Brito Negrín.");
+        stage.setTitle("Gestión de usuarios y proyectos - Principal");
         stage.setScene(scene);
         stage.show();
     }

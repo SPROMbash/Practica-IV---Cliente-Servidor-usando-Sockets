@@ -56,9 +56,41 @@ public class CrearUsuarioControlador {
         }
     }
 
+    public void crearProyecto(ActionEvent actionEvent) {
+        try {
+            App.setRoot("crearProyecto", "Proyectos - Crear proyecto");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void modificarProyecto(ActionEvent actionEvent) {
+        try {
+            App.setRoot("modificarProyecto", "Proyectos - Modificar proyecto");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void eliminarProyecto(ActionEvent actionEvent) {
+        try {
+            App.setRoot("eliminarProyecto", "Proyectos - Eliminar proyecto");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void volver(ActionEvent actionEvent) {
         try {
-            App.setRoot("principal", "Principal");
+            App.setRoot("principal", "Gestión de usuarios y proyectos - Principal");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void abrirUsuarioProyectos(ActionEvent actionEvent) {
+        try {
+            App.setRoot("usuarioProyectos", "Usuarios - Proyectos");
         } catch (Exception e) {
             e.printStackTrace();
         }

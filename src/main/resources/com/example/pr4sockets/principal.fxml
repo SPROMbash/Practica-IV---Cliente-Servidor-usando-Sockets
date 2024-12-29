@@ -38,6 +38,11 @@
                   <MenuItem fx:id="menuItemEliminarProyecto" mnemonicParsing="false" onAction="#eliminarProyecto" text="Eliminar proyecto..." />
               </items>
             </Menu>
+            <Menu mnemonicParsing="false" text="Gestionar relaciones">
+              <items>
+                <MenuItem fx:id="menuItemUsuarioProyectos" mnemonicParsing="false" onAction="#abrirUsuarioProyectos" text="Relacion entre un usuario y sus proyectos..." />
+              </items>
+            </Menu>
             <Menu mnemonicParsing="false" text="Consultas">
               <items>
                 <MenuItem mnemonicParsing="false" text="Action 1" />
@@ -48,11 +53,6 @@
               <MenuItem mnemonicParsing="false" text="Ayuda..." />
             </items>
           </Menu>
-            <Menu mnemonicParsing="false" text="Accesibilidad">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Tamaño del texto" />
-              </items>
-            </Menu>
             <Menu mnemonicParsing="false" text="Salir">
               <items>
                 <MenuItem fx:id="menuItemSalir" mnemonicParsing="false" onAction="#salir" text="Salir..." />
@@ -91,11 +91,11 @@
             <Font name="System Bold" size="28.0" />
          </font>
       </Label>
-      <TableView fx:id="tablaUsuariosProyectos" layoutX="538.0" layoutY="571.0" prefHeight="167.0" style="-fx-background-color: #D9E8FF;">
+      <TableView fx:id="tablaUsuarioProyecto" layoutX="160.0" layoutY="571.0" prefHeight="161.0" prefWidth="1056.0" style="-fx-background-color: #D9E8FF;">
          <columns>
-            <TableColumn fx:id="tcIdUsuarioProyecto" prefWidth="35.0" styleClass="table-cell" text="id" />
-            <TableColumn fx:id="tcIdUsuarioUsuarioProyecto" minWidth="0.0" prefWidth="110.0" styleClass="table-cell" text="ID_Usuario" />
-            <TableColumn fx:id="tcIdProyectoUsuarioProyecto" prefWidth="102.0" styleClass="table-cell" text="ID_Proyecto" />
+            <TableColumn fx:id="tcIdUsuarioProyecto" prefWidth="77.0" styleClass="table-cell" text="id" />
+            <TableColumn fx:id="tcIdUsuarioUsuarioProyecto" minWidth="22.0" prefWidth="489.5" styleClass="table-cell" text="Usuario" />
+            <TableColumn fx:id="tcIdProyectoUsuarioProyecto" minWidth="200.0" prefWidth="489.5" styleClass="table-cell" text="Proyecto" />
          </columns>
       </TableView>
       <TextField fx:id="txtNombre" layoutX="120.0" layoutY="201.0" onAction="#filtrarNombre" prefHeight="30.0" prefWidth="153.0" promptText="Introduce un nombre">

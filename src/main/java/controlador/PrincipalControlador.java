@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import modelo.Proyecto;
 import modelo.Usuario;
+import modelo.UsuarioProyecto;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -48,6 +49,15 @@ public class PrincipalControlador {
     private TableColumn<Usuario, String> tcTipoProyecto;
 
     @FXML
+    private TableView<UsuarioProyecto> tablaUsuarioProyecto;
+    @FXML
+    private TableColumn<UsuarioProyecto, String> tcIdUsuarioProyecto;
+    @FXML
+    private TableColumn<UsuarioProyecto, String> tcIdUsuarioUsuarioProyecto;
+    @FXML
+    private TableColumn<UsuarioProyecto, String> tcIdProyectoUsuarioProyecto;
+
+    @FXML
     public void initialize() {
         tcIdUsuario.setCellValueFactory(new PropertyValueFactory<>("id"));
         tcNombreUsuario.setCellValueFactory(new PropertyValueFactory<>("Nombre"));
@@ -60,6 +70,11 @@ public class PrincipalControlador {
         tcDescripcionProyecto.setCellValueFactory(new PropertyValueFactory<>("Descripcion"));
         tcTipoProyecto.setCellValueFactory(new PropertyValueFactory<>("Tipo"));
         listarProyectos();
+
+        tcIdUsuarioProyecto.setCellValueFactory(new PropertyValueFactory<>("id"));
+        tcIdUsuarioUsuarioProyecto.setCellValueFactory(new PropertyValueFactory<>("usuario"));
+        tcIdProyectoUsuarioProyecto.setCellValueFactory(new PropertyValueFactory<>("proyecto"));
+        listarUsuarioProyecto();
 
         cbTipo.getItems().addAll("Desarrollo", "Investigación", "Formación", "Mejora", "Empresarial");
 
@@ -85,7 +100,7 @@ public class PrincipalControlador {
             List<Usuario> usuarios = new ArrayList<>();
             if (tamanio != 0) {
                 for (int i = 0; i < tamanio; i++) {
-                    usuarios.add(deserializarUsuario(entrada.readUTF()));
+                    usuarios.add(Usuario.deserializar(entrada.readUTF()));
                 }
                 tablaUsuarios.getItems().setAll(usuarios);
             }
@@ -127,7 +142,7 @@ public class PrincipalControlador {
             List<Proyecto> proyectos = new ArrayList<>();
 
             for (int i = 0; i < tamanio; i++) {
-                proyectos.add(deserializarProyecto(entrada.readUTF()));
+                proyectos.add(Proyecto.deserializar(entrada.readUTF()));
             }
             tablaProyecto.getItems().setAll(proyectos);
         } catch (Exception e) {
@@ -155,16 +170,6 @@ public class PrincipalControlador {
         System.exit(0);
     }
 
-    private Usuario deserializarUsuario(String s) {
-        String[] campos = s.split(",");
-        return new Usuario(Long.parseLong(campos[0]), campos[1], campos[3], campos[2]);
-    }
-
-    private Proyecto deserializarProyecto(String s) {
-        String[] campos = s.split(",");
-        return new Proyecto(Long.parseLong(campos[0]), campos[1], campos[2], campos[3]);
-    }
-
     public void filtrarNombre() {
         String nombre = txtNombre.getText();
         if (!nombre.isEmpty()) {
@@ -178,7 +183,7 @@ public class PrincipalControlador {
                     List<Usuario> usuarios = new ArrayList<>();
 
                     for (int i = 0; i < tamanio; i++) {
-                        usuarios.add(deserializarUsuario(entrada.readUTF()));
+                        usuarios.add(Usuario.deserializar(entrada.readUTF()));
                     }
                     tablaUsuarios.getItems().setAll(usuarios);
                 } else {
@@ -205,7 +210,7 @@ public class PrincipalControlador {
                     List<Usuario> usuarios = new ArrayList<>();
 
                     for (int i = 0; i < tamanio; i++) {
-                        usuarios.add(deserializarUsuario(entrada.readUTF()));
+                        usuarios.add(Usuario.deserializar(entrada.readUTF()));
                     }
                     tablaUsuarios.getItems().setAll(usuarios);
                 } else {
@@ -232,7 +237,7 @@ public class PrincipalControlador {
                     List<Proyecto> proyectos = new ArrayList<>();
 
                     for (int i = 0; i < tamanio; i++) {
-                        proyectos.add(deserializarProyecto(entrada.readUTF()));
+                        proyectos.add(Proyecto.deserializar(entrada.readUTF()));
                     }
                     tablaProyecto.getItems().setAll(proyectos);
                 } else {
@@ -246,6 +251,26 @@ public class PrincipalControlador {
         }
     }
 
+    public void listarUsuarioProyecto() {
+        try (Socket socket = new Socket("localhost", 12345);
+             DataInputStream entrada = new DataInputStream(socket.getInputStream());
+             DataOutputStream salida = new DataOutputStream(socket.getOutputStream())) {
+            salida.writeUTF("up:listar");
+            int tamanio = entrada.readInt();
+            if (tamanio > 0) { // Solo procesar si hay datos
+                List<UsuarioProyecto> usuarioProyecto = new ArrayList<>();
+                for (int i = 0; i < tamanio; i++) {
+                    usuarioProyecto.add(UsuarioProyecto.deserializar(entrada.readUTF())); // Leer cada elemento
+                }
+                tablaUsuarioProyecto.getItems().setAll(usuarioProyecto); // Mostrar en la tabla
+            } else {
+                tablaUsuarioProyecto.getItems().clear(); // No hay datos, limpiar tabla
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void limpiarFiltroProyecto(ActionEvent actionEvent) {
         cbTipo.getSelectionModel().clearSelection();
         listarProyectos();
@@ -255,4 +280,13 @@ public class PrincipalControlador {
         txtNombre.clear();
         txtEmail.clear();
     }
+
+    public void abrirUsuarioProyectos(ActionEvent actionEvent) {
+        try {
+            App.setRoot("usuarioProyectos", "Gestión de la relación de un usuario con sus proyectos.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            }
+    }
+
 }

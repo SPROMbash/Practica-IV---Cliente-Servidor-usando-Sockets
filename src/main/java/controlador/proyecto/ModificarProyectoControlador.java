@@ -40,10 +40,7 @@ public class ModificarProyectoControlador {
         tcNombreProyecto.setCellValueFactory(new PropertyValueFactory<>("Nombre"));
         tcDescripcionProyecto.setCellValueFactory(new PropertyValueFactory<>("Descripcion"));
         tcTipoProyecto.setCellValueFactory(new PropertyValueFactory<>("Tipo"));
-        int tamanio = listarProyectos();
-        for (int i = 1; i <= tamanio; i++) {
-            cbIdsProyecto.getItems().add(i);
-        }
+        cargarProyectos();
         cbTipo.getItems().addAll("Desarrollo", "Investigación", "Formación", "Mejora", "Empresarial");
     }
     public void crearUsuario(ActionEvent actionEvent) {
@@ -79,44 +76,45 @@ public class ModificarProyectoControlador {
     }
 
     public void modificar(ActionEvent actionEvent) {
-        try (Socket socket = new Socket("localhost", 12345);
-             DataOutputStream salida = new DataOutputStream(socket.getOutputStream());
-             DataInputStream entrada = new DataInputStream(socket.getInputStream())) {
-            if (comprobarCampos()) {
-                String idProyecto = cbIdsProyecto.getValue().toString();
-                String nombre = txtNombre.getText();
-                String descripcion = txtDescripcion.getText();
-                String tipo = cbTipo.getValue() != null ? cbTipo.getValue().toString() : null;
+        if (comprobarId()) {
+            try (Socket socket = new Socket("localhost", 12345);
+                 DataOutputStream salida = new DataOutputStream(socket.getOutputStream());
+                 DataInputStream entrada = new DataInputStream(socket.getInputStream())) {
+                if (comprobarCampos()) {
+                    Long idProyecto = (Long) cbIdsProyecto.getValue();
+                    String nombre = txtNombre.getText();
+                    String descripcion = txtDescripcion.getText();
+                    String tipo = cbTipo.getValue() != null ? cbTipo.getValue().toString() : null;
 
-                salida.writeUTF("proyecto:actualizar");
-                salida.writeUTF(idProyecto);
+                    salida.writeUTF("proyecto:actualizar");
+                    salida.writeLong(idProyecto);
 
-                if (nombre != null && !nombre.isEmpty()) {
-                    salida.writeUTF(nombre);
-                } else {
-                    salida.writeUTF("");
+                    if (nombre != null && !nombre.isEmpty()) {
+                        salida.writeUTF(nombre);
+                    } else {
+                        salida.writeUTF("");
+                    }
+                    if (descripcion != null && !descripcion.isEmpty()) {
+                        salida.writeUTF(descripcion);
+                    } else {
+                        salida.writeUTF("");
+                    }
+                    if (tipo != null && !tipo.isEmpty()) {
+                        salida.writeUTF(tipo);
+                    } else {
+                        salida.writeUTF("");
+                    }
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Información");
+                    alert.setHeaderText("Proyecto actualizado");
+                    alert.setContentText(entrada.readUTF());
+                    alert.showAndWait();
                 }
-                if (descripcion != null && !descripcion.isEmpty()) {
-                    salida.writeUTF(descripcion);
-                } else {
-                    salida.writeUTF("");
-                }
-                if (tipo != null && !tipo.isEmpty()) {
-                    salida.writeUTF(tipo);
-                } else {
-                    salida.writeUTF("");
-                }
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Información");
-                alert.setHeaderText("Proyecto actualizado");
-                alert.setContentText("Proyecto actualizado correctamente.");
-                alert.showAndWait();
+                volver(null);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            volver(null);
-        } catch (Exception e) {
-            e.printStackTrace();
         }
-
     }
 
     public void eliminarProyecto(ActionEvent actionEvent) {
@@ -135,28 +133,38 @@ public class ModificarProyectoControlador {
         }
     }
 
-    public int listarProyectos() {
+    private void cargarProyectos() {
         try (Socket socket = new Socket("localhost", 12345);
              DataInputStream entrada = new DataInputStream(socket.getInputStream());
              DataOutputStream salida = new DataOutputStream(socket.getOutputStream())) {
             salida.writeUTF("proyecto:listar");
             int tamanio = entrada.readInt();
-            List<Proyecto> proyectos = new ArrayList<>();
-
-            for (int i = 0; i < tamanio; i++) {
-                proyectos.add(deserializarProyecto(entrada.readUTF()));
+            if (tamanio > 0) {
+                List<Proyecto> proyectos = new ArrayList<>();
+                List<Long> idProyectos = new ArrayList<>();
+                for (int i = 0; i < tamanio; i++) {
+                    proyectos.add(Proyecto.deserializar(entrada.readUTF()));
+                    idProyectos.add(proyectos.get(i).getId());
+                }
+                tablaProyecto.getItems().setAll(proyectos);
+                cbIdsProyecto.getItems().setAll(idProyectos);
             }
-            tablaProyecto.getItems().addAll(proyectos);
-            return tamanio;
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return 0;
     }
 
-    private Proyecto deserializarProyecto(String s) {
-        String[] campos = s.split(",");
-        return new Proyecto(Long.parseLong(campos[0]), campos[1], campos[2], campos[3]);
+    private boolean comprobarId() {
+        if (cbIdsProyecto.getValue() == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Campo vacío");
+            alert.setContentText("Por favor, selecciona un proyecto.");
+            alert.showAndWait();
+            return false;
+        }
+        return true;
     }
 
     private boolean comprobarCampos() {
@@ -169,5 +177,13 @@ public class ModificarProyectoControlador {
             return false;
         }
         return true;
+    }
+
+    public void abrirUsuarioProyectos(ActionEvent actionEvent) {
+        try {
+            App.setRoot("usuarioProyectos", "Usuarios - Proyectos");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

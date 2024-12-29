@@ -7,16 +7,26 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #87B4FD;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.usuario.CrearUsuarioControlador">
    <children>
-      <MenuBar layoutX="14.0" layoutY="2.0" style="-fx-background-color: #ECD5C4;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <MenuBar layoutX="14.0" layoutY="2.0" style="-fx-background-color: #dedcdc;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <menus>
             <Menu mnemonicParsing="false" text="Usuarios">
                <items>
-                  <MenuItem fx:id="menuItemCrearUsuario" mnemonicParsing="false" text="Crear usuario..." />
                   <MenuItem fx:id="menuItemModificarUsuario" mnemonicParsing="false" onAction="#modificarUsuario" text="Modificar usuario..." />
                   <MenuItem fx:id="menuItemEliminarUsuario" mnemonicParsing="false" onAction="#eliminarUsuario" text="Eliminar usuario..." />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Proyectos">
+               <items>
+                  <MenuItem fx:id="menuItemCrearProyecto" mnemonicParsing="false" onAction="#crearProyecto" text="Crear proyecto..." />
+                  <MenuItem fx:id="menuItemModificarProyecto" mnemonicParsing="false" onAction="#modificarProyecto" text="Modificar proyecto..." />
+                  <MenuItem fx:id="menuItemEliminarProyecto" mnemonicParsing="false" onAction="#eliminarProyecto" text="Eliminar proyecto..." />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Gestionar relaciones">
+               <items>
+                  <MenuItem fx:id="menuItemUsuarioProyectos" mnemonicParsing="false" onAction="#abrirUsuarioProyectos" text="Relación entre un usuario y sus proyectos" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Consultas">
@@ -27,11 +37,6 @@
             <Menu mnemonicParsing="false" text="Ayuda">
                <items>
                   <MenuItem mnemonicParsing="false" text="Ayuda..." />
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Accesibilidad">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="Tamaño del texto" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Volver">
@@ -81,12 +86,12 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="buttonCrear" layoutX="430.0" layoutY="577.0" mnemonicParsing="false" onAction="#crear" style="-fx-background-radius: 25; -fx-background-color: #ECD5C4;" text="Crear usuario" AnchorPane.leftAnchor="450.0">
+      <Button fx:id="buttonCrear" layoutX="430.0" layoutY="577.0" mnemonicParsing="false" onAction="#crear" style="-fx-background-radius: 10; -fx-background-color: #ffffff;" text="Crear usuario" AnchorPane.leftAnchor="450.0">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="buttonVolver" layoutX="747.0" layoutY="577.0" mnemonicParsing="false" onAction="#volver" style="-fx-background-radius: 25; -fx-background-color: #ECD5C4;" text="Volver" AnchorPane.rightAnchor="450.0">
+      <Button fx:id="buttonVolver" layoutX="747.0" layoutY="577.0" mnemonicParsing="false" onAction="#volver" style="-fx-background-radius: 10; -fx-background-color: #ffffff;" text="Volver" AnchorPane.rightAnchor="450.0">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

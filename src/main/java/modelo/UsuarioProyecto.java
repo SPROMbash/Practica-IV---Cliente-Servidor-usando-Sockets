@@ -9,19 +9,31 @@ public class UsuarioProyecto {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "usuario_id")
-    private Long usuarioId;
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario usuario;
 
-    @Column(name = "proyecto_id")
-    private Long proyectoId;
+    @ManyToOne
+    @JoinColumn(name = "proyecto_id", nullable = false)
+    private Proyecto proyecto;
 
     public UsuarioProyecto() {
 
     }
 
-    public UsuarioProyecto(Long usuarioId, Long proyectoId) {
-        this.usuarioId = usuarioId;
-        this.proyectoId = proyectoId;
+    public UsuarioProyecto(Long id) {
+        this.id = id;
+    }
+
+    public UsuarioProyecto(Long id, Usuario usuario, Proyecto proyecto) {
+        this.id = id;
+        this.usuario = usuario;
+        this.proyecto = proyecto;
+    }
+
+    public UsuarioProyecto(Usuario usuario, Proyecto proyecto) {
+        this.usuario = usuario;
+        this.proyecto = proyecto;
     }
 
     public Long getId() {
@@ -32,24 +44,31 @@ public class UsuarioProyecto {
         this.id = id;
     }
 
-    public Long getUsuarioId() {
-        return usuarioId;
+    public Proyecto getProyecto() {
+        return proyecto;
     }
 
-    public void setUsuarioId(Long usuarioId) {
-        this.usuarioId = usuarioId;
+    public void setProyecto(Proyecto proyecto) {
+        this.proyecto = proyecto;
     }
 
-    public Long getProyectoId() {
-        return proyectoId;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setProyectoId(Long proyectoId) {
-        this.proyectoId = proyectoId;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public static UsuarioProyecto deserializar(String linea) {
+        String[] campos = linea.split(",");
+        Usuario usuario = new Usuario(Long.parseLong(campos[1]), campos[2], campos[3], campos[4]);
+        Proyecto proyecto = new Proyecto(Long.parseLong(campos[5]), campos[6], campos[7], campos[8]);
+        return new UsuarioProyecto(Long.parseLong(campos[0]), usuario, proyecto);
     }
 
     @Override
     public String toString() {
-        return "Usuario-Proyecto --> id: " + id + "|| usuarioId: " + usuarioId + "|| proyectoId: " + proyectoId;
+        return id + "," + usuario+ "," + proyecto;
     }
 }

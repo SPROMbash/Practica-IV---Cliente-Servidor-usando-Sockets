@@ -9,7 +9,7 @@
 
 <AnchorPane prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #87B4FD;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.proyecto.ModificarProyectoControlador">
     <children>
-        <MenuBar layoutX="14.0" layoutY="2.0" style="-fx-background-color: #ECD5C4;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <MenuBar layoutX="14.0" layoutY="2.0" style="-fx-background-color: #dedcdc;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <menus>
                 <Menu mnemonicParsing="false" text="Usuarios">
                     <items>
@@ -24,6 +24,11 @@
                         <MenuItem fx:id="menuItemEliminarProyecto" mnemonicParsing="false" onAction="#eliminarProyecto" text="Eliminar proyecto..." />
                     </items>
                 </Menu>
+                <Menu mnemonicParsing="false" text="Gestionar relaciones">
+                    <items>
+                        <MenuItem fx:id="menuItemUsuarioProyectos" mnemonicParsing="false" onAction="#abrirUsuarioProyectos" text="Relación entre un usuario y sus proyectos" />
+                    </items>
+                </Menu>
                 <Menu mnemonicParsing="false" text="Consultas">
                     <items>
                         <MenuItem mnemonicParsing="false" text="Action 1" />
@@ -32,11 +37,6 @@
                 <Menu mnemonicParsing="false" text="Ayuda">
                     <items>
                         <MenuItem mnemonicParsing="false" text="Ayuda..." />
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Accesibilidad">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="Tamaño del texto" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Volver">
@@ -71,12 +71,12 @@
                 <Font name="System Bold" size="18.0" />
             </font>
         </Label>
-        <Button fx:id="buttonModificar" layoutX="437.0" layoutY="687.0" mnemonicParsing="false" onAction="#modificar" style="-fx-background-radius: 25; -fx-background-color: #ECD5C4;" text="Modificar proyecto" AnchorPane.leftAnchor="437.0">
+        <Button fx:id="buttonModificar" layoutX="437.0" layoutY="687.0" mnemonicParsing="false" onAction="#modificar" style="-fx-background-radius: 10; -fx-background-color: #ffffff;" text="Modificar proyecto" AnchorPane.leftAnchor="437.0">
             <font>
                 <Font name="System Bold" size="18.0" />
             </font>
         </Button>
-        <Button fx:id="buttonVolver" layoutX="769.0" layoutY="687.0" mnemonicParsing="false" onAction="#volver" style="-fx-background-radius: 25; -fx-background-color: #ECD5C4;" text="Volver" AnchorPane.rightAnchor="452.0">
+        <Button fx:id="buttonVolver" layoutX="769.0" layoutY="687.0" mnemonicParsing="false" onAction="#volver" style="-fx-background-radius: 10; -fx-background-color: #ffffff;" text="Volver" AnchorPane.rightAnchor="452.0">
             <font>
                 <Font name="System Bold" size="18.0" />
             </font>
@@ -90,7 +90,7 @@
          </columns>
       </TableView>
       <ComboBox fx:id="cbIdsProyecto" layoutX="468.0" layoutY="317.0" prefHeight="39.0" prefWidth="400.0" />
-      <Label alignment="CENTER_RIGHT" layoutX="34.0" layoutY="323.0" text="Eligue un id existente para eliminar*:" AnchorPane.leftAnchor="34.0" AnchorPane.rightAnchor="850.0">
+      <Label alignment="CENTER_RIGHT" layoutX="34.0" layoutY="323.0" text="Eligue un id existente para modificar" AnchorPane.leftAnchor="34.0" AnchorPane.rightAnchor="850.0">
          <font>
             <Font name="System Bold Italic" size="18.0" />
          </font>

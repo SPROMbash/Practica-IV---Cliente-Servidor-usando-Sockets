@@ -1,14 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controlador.usuario.ModificarUsuarioControlador"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #87B4FD;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.usuario.ModificarUsuarioControlador">
+    <children>
+        <MenuBar layoutX="14.0" layoutY="2.0" style="-fx-background-color: #dedcdc;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="Usuarios">
+                    <items>
+                        <MenuItem fx:id="menuItemCrearUsuario" mnemonicParsing="false" onAction="#crearUsuario" text="Crear usuario..." />
+                        <MenuItem fx:id="menuItemModificarUsuario" mnemonicParsing="false" onAction="#modificarUsuario" text="Modificar usuario..." />
+                        <MenuItem fx:id="menuItemEliminarUsuario" mnemonicParsing="false" onAction="#eliminarUsuario" text="Eliminar usuario..." />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Proyectos">
+                    <items>
+                        <MenuItem fx:id="menuItemCrearProyecto" mnemonicParsing="false" onAction="#crearProyecto" text="Crear proyecto..." />
+                        <MenuItem fx:id="menuItemEliminarProyecto" mnemonicParsing="false" onAction="#eliminarProyecto" text="Eliminar proyecto..." />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Gestionar relaciones">
+                    <items>
+                        <MenuItem fx:id="menuItemUsuarioProyectos" mnemonicParsing="false" onAction="#abrirUsuarioProyectos" text="Relación entre un usuario y sus proyectos" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Consultas">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Action 1" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Ayuda">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Ayuda..." />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Volver">
+                    <items>
+                        <MenuItem fx:id="menuItemVolver" mnemonicParsing="false" onAction="#volver" text="Volver..." />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <Label alignment="CENTER" layoutX="396.0" layoutY="57.0" text="Modificar un usuario" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="57.0">
+            <font>
+                <Font name="System Bold Italic" size="36.0" />
+            </font>
+        </Label>
+        <TextField fx:id="txtNombre" layoutX="471.0" layoutY="385.0" prefHeight="20.0" prefWidth="400.0" promptText="ej.: Daniel">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </TextField>
+        <Label alignment="CENTER_RIGHT" layoutX="50.0" layoutY="387.0" text="Nombre:" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="850.0">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Label>
+        <Label alignment="CENTER_RIGHT" layoutX="50.0" layoutY="459.0" text="Apellidos" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="850.0">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Label>
+        <Label alignment="CENTER_RIGHT" layoutX="50.0" layoutY="522.0" text="Email:" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="850.0">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Label>
+        <Button fx:id="buttonModificar" layoutX="438.0" layoutY="617.0" mnemonicParsing="false" onAction="#modificar" style="-fx-background-radius: 10; -fx-background-color: #ffffff;" text="Modificar proyecto" AnchorPane.leftAnchor="438.0">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Button>
+        <Button fx:id="buttonVolver" layoutX="769.0" layoutY="617.0" mnemonicParsing="false" onAction="#volver" style="-fx-background-radius: 10; -fx-background-color: #ffffff;" text="Volver" AnchorPane.rightAnchor="452.0">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Button>
+        <ComboBox fx:id="cbUsuarios" layoutX="468.0" layoutY="317.0" prefHeight="39.0" prefWidth="400.0" />
+        <Label alignment="CENTER_RIGHT" layoutX="34.0" layoutY="323.0" text="Eligue un id existente para modificar*:" AnchorPane.leftAnchor="34.0" AnchorPane.rightAnchor="850.0">
+            <font>
+                <Font name="System Bold Italic" size="18.0" />
+            </font>
+        </Label>
+      <TextField fx:id="txtApellidos" layoutX="471.0" layoutY="453.0" prefHeight="20.0" prefWidth="400.0" promptText="ej.: Brito Negrín">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtEmail" layoutX="471.0" layoutY="516.0" prefHeight="20.0" prefWidth="400.0" promptText="ej.: daniel@example.com">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <TableView fx:id="tablaUsuarios" layoutX="241.0" layoutY="124.0" prefHeight="165.0" prefWidth="855.0" style="-fx-background-color: #D9E8FF;" AnchorPane.leftAnchor="241.0" AnchorPane.rightAnchor="204.0">
+         <columns>
+            <TableColumn fx:id="tcIdUsuario" prefWidth="41.0" styleClass="table-cell" text="id" />
+            <TableColumn fx:id="tcNombreUsuario" minWidth="0.0" prefWidth="271.0" styleClass="table-cell" text="Nombre" />
+            <TableColumn fx:id="tcApellidosUsuario" prefWidth="271.0" styleClass="table-cell" text="Apellidos" />
+            <TableColumn fx:id="tcEmailUsuario" prefWidth="271.0" styleClass="table-cell" text="Email" />
+         </columns>
+      </TableView>
+    </children>
 </AnchorPane>
