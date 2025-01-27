@@ -13,4 +13,10 @@ module com.example.pr4sockets {
     opens dao to org.hibernate.orm.core;
     exports modelo;
     opens modelo to org.hibernate.orm.core;
+    exports controlador.usuario;
+    opens controlador.usuario to javafx.fxml;
+    exports controlador.proyecto;
+    opens controlador.proyecto to javafx.fxml;
+    exports controlador.relaciones;
+    opens controlador.relaciones to javafx.fxml;
 }

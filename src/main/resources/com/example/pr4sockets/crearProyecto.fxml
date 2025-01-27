@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #87B4FD;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.proyecto.CrearProyectoControlador">
+    <children>
+        <MenuBar layoutX="14.0" layoutY="2.0" style="-fx-background-color: #dedcdc;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="Usuarios">
+                    <items>
+                        <MenuItem fx:id="menuItemCrearUsuario" mnemonicParsing="false" onAction="#crearUsuario" text="Crear usuario..." />
+                        <MenuItem fx:id="menuItemModificarUsuario" mnemonicParsing="false" onAction="#modificarUsuario" text="Modificar usuario..." />
+                        <MenuItem fx:id="menuItemEliminarUsuario" mnemonicParsing="false" onAction="#eliminarUsuario" text="Eliminar usuario..." />
+                    </items>
+                </Menu>
+            <Menu mnemonicParsing="false" text="Proyectos">
+               <items>
+                  <MenuItem fx:id="menuItemModificarProyecto" mnemonicParsing="false" onAction="#modificarProyecto" text="Modificar proyecto..." />
+                  <MenuItem fx:id="menuItemEliminarProyecto" mnemonicParsing="false" onAction="#eliminarProyecto" text="Eliminar proyecto..." />
+               </items>
+            </Menu>
+                <Menu mnemonicParsing="false" text="Consultas">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Action 1" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Gestionar relaciones">
+                    <items>
+                        <MenuItem fx:id="menuItemUsuarioProyectos" mnemonicParsing="false" onAction="#abrirUsuarioProyectos" text="Relación entre un usuario y sus proyectos" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Ayuda">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Ayuda..." />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Volver">
+                    <items>
+                        <MenuItem fx:id="menuItemVolver" mnemonicParsing="false" onAction="#volver" text="Volver..." />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <Label alignment="CENTER" layoutX="396.0" layoutY="57.0" text="Formulario para crear proyecto" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="57.0">
+            <font>
+                <Font name="System Bold Italic" size="36.0" />
+            </font>
+        </Label>
+        <Label alignment="CENTER" layoutX="504.0" layoutY="121.0" text="Los campos marcados con * son obligatorios" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="121.0">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Label>
+        <TextField fx:id="txtNombre" layoutX="498.0" layoutY="202.0" prefHeight="20.0" prefWidth="400.0" promptText="ej.: Implementación de un ERP">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </TextField>
+        <Label alignment="CENTER_RIGHT" layoutX="50.0" layoutY="208.0" text="Nombre*:" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="850.0">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Label>
+        <Label alignment="CENTER_RIGHT" layoutX="50.0" layoutY="294.0" text="Descripción*:" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="850.0">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Label>
+        <Label alignment="CENTER_RIGHT" layoutX="50.0" layoutY="511.0" text="Tipo*:" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="850.0">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Label>
+        <Button fx:id="buttonCrear" layoutX="430.0" layoutY="577.0" mnemonicParsing="false" onAction="#crear" style="-fx-background-radius: 10; -fx-background-color: #ffffff;" text="Crear proyecto" AnchorPane.leftAnchor="450.0">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Button>
+        <Button fx:id="buttonVolver" layoutX="747.0" layoutY="577.0" mnemonicParsing="false" onAction="#volver" style="-fx-background-radius: 10; -fx-background-color: #ffffff;" text="Volver" AnchorPane.rightAnchor="450.0">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Button>
+      <TextArea fx:id="txtDescripcion" layoutX="498.0" layoutY="288.0" prefHeight="178.0" prefWidth="400.0" promptText="ej.: Implementar un sistema de gestión empresarial para mejorar la eficiencia del negocio">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextArea>
+      <ComboBox fx:id="cbTipo" layoutX="498.0" layoutY="504.0" prefHeight="33.0" prefWidth="400.0" />
+    </children>
+</AnchorPane>

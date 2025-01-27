@@ -13,7 +13,7 @@ public class Main {
     public static void main(String[] args) {
         try {
             ServerSocket server = new ServerSocket(PUERTO);
-            System.out.println("Servidor iniciado en el puerto 1234");
+            System.out.println("Servidor iniciado en el puerto " + PUERTO);
             while (true) {
                 Socket socket = server.accept();
                 ManejoCliente manejador = new ManejoCliente(socket);

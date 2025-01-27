@@ -61,7 +61,7 @@ public class GenericDAO<T> {
         return false;
     }
 
-    public T obtenerPorId(int id) {
+    public T obtenerPorId(Long id) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.get(entidad, id);
         } catch (Exception e) {
